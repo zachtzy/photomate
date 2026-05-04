@@ -1,0 +1,33 @@
+[project]
+name = "scene-intelligence"
+version = "0.1.0"
+description = "PhotoMate AI scene analysis service - scene classification, composition analysis, lighting assessment"
+requires-python = ">=3.11"
+dependencies = [
+    "grpcio>=1.68.0",
+    "grpcio-tools>=1.68.0",
+    "protobuf>=5.28.0",
+    "fastapi>=0.115.0",
+    "uvicorn>=0.32.0",
+    "torch>=2.4.0",
+    "torchvision>=0.19.0",
+    "ultralytics>=8.3.0",
+    "numpy>=1.26.0",
+    "pillow>=10.4.0",
+    "opencv-python-headless>=4.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "grpcio-testing>=1.68.0",
+]
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

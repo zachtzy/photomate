@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package photomate.scene;
+
+option java_package = "com.photomate.proto.scene";
+option java_multiple_files = true;
+
+service SceneIntelligence {
+  rpc AnalyzeFrame (FrameAnalysisRequest) returns (FrameAnalysisResponse);
+  rpc AnalyzeFrameStream (stream FrameAnalysisRequest) returns (stream FrameAnalysisResponse);
+}
+
+message FrameAnalysisRequest {
+  bytes frame_data = 1;
+  int32 width = 2;
+  int32 height = 3;
+  int64 timestamp_ms = 4;
+}
+
+message FrameAnalysisResponse {
+  SceneClassification scene = 1;
+  CompositionAnalysis composition = 2;
+  LightingAnalysis lighting = 3;
+  repeated BoundingBox subjects = 4;
+  int64 processing_time_ms = 5;
+}
+
+message SceneClassification {
+  string scene_type = 1;
+  float confidence = 2;
+  repeated SceneCandidate top_candidates = 3;
+}
+
+message SceneCandidate {
+  string scene_type = 1;
+  float confidence = 2;
+}
+
+message CompositionAnalysis {
+  float rule_of_thirds_score = 1;
+  float symmetry_score = 2;
+  int32 leading_lines_count = 3;
+  float leading_lines_quality = 4;
+  BoundingBox main_subject = 5;
+}
+
+message LightingAnalysis {
+  string direction = 1;
+  string quality = 2;
+  int32 estimated_color_temp_kelvin = 3;
+  float dynamic_range_ev = 4;
+  float overall_score = 5;
+}
+
+message BoundingBox {
+  float x = 1;
+  float y = 2;
+  float width = 3;
+  float height = 4;
+  string label = 5;
+  float confidence = 6;
+}

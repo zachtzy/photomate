@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package photomate.parameter;
+
+option java_package = "com.photomate.proto.parameter";
+option java_multiple_files = true;
+
+service ParameterService {
+  rpc Recommend (ParameterRequest) returns (ParameterRecommendation);
+}
+
+message ParameterRequest {
+  string scene_type = 1;
+  LightingInput lighting = 2;
+  DeviceCapability device = 3;
+}
+
+message LightingInput {
+  string direction = 1;
+  string quality = 2;
+  int32 color_temp_kelvin = 3;
+  float dynamic_range_ev = 4;
+  float score = 5;
+}
+
+message DeviceCapability {
+  string device_type = 1;
+  int32 iso_min = 2;
+  int32 iso_max = 3;
+  float aperture_min = 4;
+  float aperture_max = 5;
+  bool has_ois = 6;
+  string sensor_size = 7;
+  float focal_length_mm = 8;
+}
+
+message ParameterRecommendation {
+  IsoRec iso = 1;
+  ShutterSpeedRec shutter_speed = 2;
+  ApertureRec aperture = 3;
+  WhiteBalanceRec white_balance = 4;
+  string explanation = 5;
+}
+
+message IsoRec {
+  int32 value = 1;
+  int32 range_min = 2;
+  int32 range_max = 3;
+  string reason = 4;
+}
+
+message ShutterSpeedRec {
+  int32 denominator = 1;
+  string display_value = 2;
+  string reason = 3;
+}
+
+message ApertureRec {
+  float f_number = 1;
+  string reason = 2;
+}
+
+message WhiteBalanceRec {
+  int32 kelvin = 1;
+  string preset_name = 2;
+  string reason = 3;
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package photomate.guidance;
+
+option java_package = "com.photomate.proto.guidance";
+option java_multiple_files = true;
+
+import "scene.proto";
+import "parameter.proto";
+
+service GuidanceService {
+  rpc GetGuidance (GuidanceRequest) returns (GuidanceResponse);
+  rpc StreamGuidance (stream GuidanceRequest) returns (stream GuidanceResponse);
+}
+
+message GuidanceRequest {
+  bytes frame_data = 1;
+  int32 width = 2;
+  int32 height = 3;
+  DeviceInfo device = 4;
+  int64 timestamp_ms = 5;
+}
+
+message DeviceInfo {
+  string device_type = 1;
+  int32 iso_min = 2;
+  int32 iso_max = 3;
+  float aperture_min = 4;
+  float aperture_max = 5;
+  bool has_ois = 6;
+  string sensor_size = 7;
+  float focal_length_mm = 8;
+}
+
+message GuidanceResponse {
+  photomate.scene.FrameAnalysisResponse scene_analysis = 1;
+  photomate.parameter.ParameterRecommendation parameters = 2;
+  string primary_tip = 3;
+  repeated string secondary_tips = 4;
+  int64 total_latency_ms = 5;
+}
