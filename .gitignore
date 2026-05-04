@@ -1,0 +1,51 @@
+# Gradle / Kotlin JVM
+.gradle/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# Local Gradle config (machine-specific)
+gradle.properties.local
+
+# Python (scene-intelligence)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+coverage.xml
+*.egg-info/
+dist/
+pip-wheel-metadata/
+
+# Claude Code / Cursor（本地 Agent、规则与索引）
+.claude/
+.cursor/
+.cursorrules
+
+# IDE & editors
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs & temp
+*.log
+*.tmp
+*.temp
