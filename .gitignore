@@ -30,6 +30,9 @@ pip-wheel-metadata/
 .claude/
 .cursor/
 .cursorrules
+.agents
+skills
+skills-lock.json
 
 # IDE & editors
 .idea/
